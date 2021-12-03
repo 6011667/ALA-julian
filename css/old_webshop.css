@@ -1,0 +1,224 @@
+/*styling voor de webshop */
+/* Algemene instellingen */
+:root {
+    --main-radius: 5px;
+    --main-padding: 15px;
+    --kaart-bg: #FFD9D9;
+    --tekstkleur: #03071E;
+    --steunkleur: #D00000;  
+  
+  }
+
+body {
+    font-family: "Roboto 2", "Helvetica Neue";
+    margin: 0;
+    text-align: center;
+    font-size: 14px;
+    
+}
+.header{
+    padding-top: 3%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+.icon_container{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.icon{
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    padding: 0; margin: 0;
+    background: #70c26f;
+    color: #fff;
+    color: yellow;
+    font-size: 3.0rem;
+}
+.icon hover {
+opacity: 0.9;
+filter: alpha(opacity=9);
+color: darkgreen;
+}
+.user{
+    font-size: 1.2rem;
+ 
+}
+nav{
+    width: 100%;
+    /* height: 10%; */
+    color: var(--kaart-bg);
+    
+}
+ul{
+    width: 100%;
+    padding: 0; margin: 0; width: 100%;
+
+} 
+li{
+    padding: 0; margin: 0; 
+    background-color: var(--steunkleur);
+    list-style-type: none;
+    text-transform: uppercase;
+    width: 20%;
+    height: 40px;
+    float: left;
+    font-size: 1.4rem;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+}
+li hover{
+    background: #C2F98E;
+    opacity: 0.8;
+    filter: alpha(opacity=8);
+}
+.nav-admin{
+    width: 20%;
+    font-size: 1.0rem;
+}
+
+/* styling inlog script */
+
+.content{
+    float: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10%;
+    font-size: 1.0rem;
+}
+
+#page_titel{
+    margin: 0; padding: 0; padding-top: 5%;
+    font-size: 1.5rem;
+    color: blue;
+}
+#melding{
+    color: red;
+    font-size: 1.0rem;
+}
+form {
+    width: 60%
+}
+input {
+    float: none;
+    height: 25px;
+    width: 100%;
+    border: none;
+    display: block;
+    color: rgb(33,33,33);
+    background: color #c2f98e;
+    border-radius: 5px;
+    margin-bottom:4%;
+    text-align: center;
+    font-size: 1.0rem;
+
+}
+input hover {
+    background: #D8F9B6
+}
+
+/* styling winkelmandje */
+#winkelmandje_knop{
+    display: none;
+}
+#winkelmandje_knop + label{
+    font-size: 3.5rem;
+}
+#winkelmandje{
+    text-align: center;
+    z-index: 3;
+    position: fixed;
+    bottom: 40%;
+    right:0;
+    left: 0;
+    height: 20%;
+    visibility: hidden;
+    width: 200%;
+    background-color: lightsalmon;
+    border-radius: 5%;
+    opacity: 0.9;
+    filter: alpha(opacity=9);
+} 
+#rijen{
+    visibility: hidden;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+} 
+
+.hero {
+    padding: 1em;
+    width: 100%;
+    color: var(--tekstkleur);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }  
+
+  .productNaam{
+      text-transform: uppercase;
+      font-weight: bold;
+  }
+
+
+  .kaart{
+    /* height: 500px; */
+    width: 350px;
+    /* background: white; */
+    margin: 10px;
+    padding: var(--main-padding);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: var(--main-radius);
+    background-color: var(--kaart-bg);
+}
+
+/* nav{
+    overflow: visible;
+    background-color: #370617;
+    font-family: Arial;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    padding: 14px 25px;
+    line-height: 100%;
+}
+
+nav li {
+    float: center;
+    display: block;
+    color: var(--tekstkleur);
+    text-align: center;
+    padding:var(--padding-box);
+    text-decoration: none;
+    font-size: 17px;
+}
+.hero {
+    padding: 1em;
+    color: var(--tekstkleur);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }  
+
+
+  .kaart{
+    /* height: 500px;
+    width: 350px; */
+    /* background: white;
+    margin: 10px;
+    padding: var(--main-padding);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: var(--main-radius);
+}  
+
+body{
+    background-color: #FEEADD;
+} */ 

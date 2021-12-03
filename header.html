@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/webshop.css">
+    <title>Pizza by Julian</title>
+    <script>
+        function uitloggen() {
+            var loguit = confirm('weet u zeker dat u wilt uitloggen?');
+            if(loguit){
+                location.href='index.php?page=uitloggen';
+            }
+        }
+    </script>
+</head>
+<body>
+   <div class="header">
+       <div class="naam">Pizza's by Julian</div>
+            <?php
+            if(isset($_SESSION["ID"]) &&
+            $_SESSION["STATUS"] == "ACTIEF") {
+                if($_SESSION["ROL"]==0){
+            ?>
+
+       
+       
+       <nav>
+            <div class="navigatie">
+                <ul>
+                    <li onclick="location.href='index.php?page=profile_edit'">Profiel</li>
+                    <li onclick="location.href='index.php?page=webshop'">webshop</li>
+                    <li onclick="location.href='index.php?page=winkelmandje'">winkelmandje</li>
+                    <li onclick="uitloggen()">uitloggen</li>
+                </ul>
+                <div class="user">
+                    <p id="user">Ingelogd als:
+                        <?php echo $_SESSION["USER_NAAM"]; ?>
+                    </p>
+                </div>
+            </div>
+                <?php
+                    }elseif($_SESSION["ROL"]==1){
+
+                ?>
+            
+            <div class="navigatie">
+                <ul>
+                    <li onclick="location.href='index.php?page=producten'">producten</li>
+                    <li onclick="location.href='index.php?page=klanten'">Klanten</li>
+                    <li onclick="location.href='index.php?page=maillist'">mail lijst</li>
+                    <li onclick="location.href='index.php?page=rapporten'">Rapporten</li>
+                    <li onclick="uitloggen()">Uitloggen</li>
+                </ul>
+                <div class="user">
+                    <p id="user">Ingelogd als:
+                        <?php echo $_SESSION["USER_NAAM"]; ?>
+                    </p>
+                </div>
+            </div>
+    </nav>
+
+<?php
+           }
+        }
+        ?>
+   </div> 
+   

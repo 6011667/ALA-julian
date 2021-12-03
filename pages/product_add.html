@@ -1,0 +1,38 @@
+
+<?php
+// var_dump(!isset($_SESSION["ID"]));
+if(!isset($_SESSION["ID"])|| (!isset($_SESSION["STATUS"]) &&$_SESSION["STATUS"]!="ACTIEF")){
+    echo "<script>
+    alert('U heeft geen toegang tot deze pagina.');
+    location.href='index.php';
+    </script>";
+}
+
+?>
+<div class="content">
+    <form name="producttoevoegen" class="form" method="POST" >
+        <p id="page_titel">product toevoegen</p>
+        <label>productnaam</label>
+        <input type="text" name="naam" id="naam" />
+        <label>omschrijving</label>
+        <input type="text" name="omschrijving" id="omschrijving" />
+        <label>formaat medium</label>
+        <input type="text" name="medium" id="medium" />
+        <label>formaat large</label>
+        <input type="text" name="large" id="large" />
+        <label>formaat small</label>
+        <input type="text" name="small" id="small" />
+        <label>prijs medium</label>
+        <input type="text" name="prijsmedium" id="prijsmedium" />
+        <label>prijs large</label>
+        <input type="text" name="prijslarge" id="prijslarge" />
+        <label>prijs small</label>
+        <input type="text" name="prijssmall" id="prijssmall" />
+        
+      
+        <div class="icon_container">
+            <input type="submit" class="icon" id="submit" name="submit" value="&rarr;" />
+        </div>
+        <a href="index.php?page=producten">terug</a>
+    </form>
+</div>

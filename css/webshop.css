@@ -1,0 +1,193 @@
+/* 
+1. Algemene Instellingen
+2. Vormgeving header en navigatie 
+3. Vormgeving inlogformulier
+4. Vormgeving zoekformulier
+5. Gedeelde vormgeving
+6. Vormgeving productenoverzicht 
+*/
+
+/* 1. Algemene instellingen */
+:root {
+    --main-radius: 5px;
+    --main-padding: 15px;
+    --rood: #ce2b37;
+    --groen: #009246;
+    --wit: #f2f2f2;
+    --helderwit: #ffffff; 
+    --grijs: #333;
+  
+  }
+body {
+    margin: 0px;
+    background-color: var(--wit);
+    }
+
+.content{
+    display: flex; 
+    flex-direction: column;
+    padding: var(--main-padding);
+    background-color: var(--wit);
+    align-content: center;
+    justify-content: center;
+}    
+
+/* 2.Vormgeving header en navigatie */
+.navigatie{
+ 
+    height:auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+}
+.header{
+    display: block;
+    background-color: var(--grijs);
+    padding: 25px;
+    color: var(--wit);
+}
+
+.naam{
+    text-align: center;
+    font-size: 3em;
+    color: var(--groen)
+}
+
+li{
+    display: inline-block;
+    background-color: var(--rood);
+    padding: var(--main-padding);
+    margin-top: var(--main-padding);
+    text-transform: uppercase;
+    min-width: 160px;
+}
+.user{
+    display: inline-block;
+    
+    padding: var(--main-padding);
+    margin-top: var(--main-padding);
+    text-transform: uppercase;
+    min-width: 160px;
+}
+
+li:hover{
+    background-color: var(--groen);
+}
+
+/* Einde vormgeving header en navigatie */
+
+/* 3. Vormgeving inlogformulier */
+
+.inlogFormulier{
+    background-color: var(--groen);
+    height: 50%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin: 50px auto ;
+    padding: var(--main-padding);
+    border-radius: var(--main-radius);
+    align-items: center;
+
+}
+
+
+
+.inloglinks a{
+
+    color: var(--rood);
+    text-decoration: none;
+}
+
+.inloglinks:hover{
+    color: var(--grijs);
+}
+
+#page_titel{
+    font-size: 3rem;
+}
+/* Einde vormgeving inlogformulier */
+
+/* 4. Vormgeving zoekformulier */
+
+#search{
+    height: auto;
+    width: 45%;
+    border: var(--main-radius);
+    background-color: var(--rood);
+    padding: var(--main-padding);
+    text-align: center;
+    margin: 10px auto ;
+}
+
+/* Einde vormgeving zoekformulier */
+
+/* 5. Gedeelde vormgeving */
+.inputVeld{
+    padding: var(--main-padding);
+    border-radius: var(--main-radius);
+    margin: var(--main-padding);
+    width: 80%;
+    border: none;
+}
+.bevestigenIcon{
+    padding: var(--main-padding);
+    border-radius: var(--main-radius);
+    margin: var(--main-padding);
+    width: 45px;
+    background-color: var(--grijs);
+    color: var(--wit);
+    border: none;
+}
+
+/* einde gedeelde vormgeving */
+
+/* 6. Vormgeving productenoverzicht */
+
+.hero{
+    
+    width: 90%;
+    margin: 10px auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.kaart{
+    background-color: white;
+    width: 250px;
+    height: 425px;
+    padding: var(--main-padding);
+    margin: var(--main-padding);
+    border-radius: var(--main-radius);
+    border: 1px solid black;
+   
+}
+.kaart img{
+    width: 250px;
+    
+}
+
+.productNaam{
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.productOmschrijving{
+    font-style: italic;
+}
+
+.voegToeButton{
+    width:auto;
+    padding: var(--main-padding);
+    border-radius: var(--main-radius);
+    margin: var(--main-padding);
+    background-color: var(--grijs);
+    color: var(--wit);
+    border: none;
+}
