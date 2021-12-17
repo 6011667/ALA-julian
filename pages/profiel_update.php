@@ -24,7 +24,10 @@ if(isset($_POST['submit'])){
     try 
     {
         
-        print_r($_POST);
+        echo "<div class='gelukt'>
+        <h1>het is je gelukt!</h1>
+        
+        </div>";
         $stmt = $stmt->execute(array($voornaam, $achternaam, $straat, $postcode, $woonplaats, $email, $email)); // , $id
         // $stmt = $stmt->execute($sql);
         // echo "<script> alert('Album is geupdated.'); location.href='index.php?page=albums';</script>";

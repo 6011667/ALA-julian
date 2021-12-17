@@ -18,7 +18,9 @@ if (isset($_POST['addc'])){
     if (!isset( $_SESSION['winkelwagen'][$_POST['select']])){
             echo "<p>hallo</p>";    
             // print_r($_SESSION);
+            if(is_numeric($_POST['aantal']) && $_POST['aantal'] >= 1){
            print_r( $_SESSION['winkelwagen'][$_POST['select']] += $_POST['aantal']);
+            }
         }
 
 
@@ -67,7 +69,13 @@ if (isset($_POST['addc'])){
         <div class="hero">
                 <!-- <form action="index.php?page=bestellen" id="webshop" method="POST" name="webshop">
                 </form> -->
-                    
+                <script>
+           var a=document.getElementById("leverbaar").value;
+           if (a == 1){
+               document.getElementById("voeToeButton").style.display="none";
+           }
+       </script>
+
             <?php
             
             $stmt = $verbinding->prepare($sql);
@@ -78,18 +86,21 @@ if (isset($_POST['addc'])){
 
                 if ( $categorie['leverbaar'] == 1){
                     $categorie['omschrijving'] = "dit product is helaas niet meer leverbaar";
-                    
+                    // echo "<div class='kaart' style='dispay: none;'>";
+                    echo '<script>  document.getElementById("voeToeButton").style.display="none"; </script>';
                 }
 
 
                 //begin van de versie van het boek
-                echo '<div class="kaart">'; 
+                echo '<div class="kaart" id="kaart">'; 
                 echo "<img width='100px' src='img/". $categorie['afbeelding']. "'/>";
                 // echo "<input type='hidden' name='id[$lus]' id='id[$lus]' value='". $product['ID'] . "' />";
                 // echo "<input type='hidden'  value='" . $categorie['naam'] . "' />";
                 // echo "<input type='hidden' value='" . $categorie['omschrijving'] . "' />";
                 // echo "<input type='hidden' name='soort[$lus]' id='soort[$lus]' value='" . $product['afbeelding']. "' />";
                 echo "<br><div  name='naam' class='productNaam'> " . $categorie["naam"] . "</div>" . "<br><div class='productOmschrijving'> " . $categorie["omschrijving"] . "</div>";
+                $leverbaar = $categorie['leverbaar'];
+                echo "<input type='hidden' id='leverbaar' value='$leverbaar' placeholder='$leverbaar' />";
                 // echo "<input type='hidden' name='id' id='id' value='". $categorie['ID'] . "' />" ;
                 $query = "SELECT * FROM product WHERE categorie_ID = ? ";
                 $stmt = $verbinding->prepare($query);
@@ -111,12 +122,12 @@ if (isset($_POST['addc'])){
                 echo "</select>";
 
                 // echo "<br> " . " Prijs: €  " . $product["prijs"] ;
-                echo "<input class='aantal' type='text' style='width: 10%;' name='aantal'  value='0' />";
-                echo "<input class='voegToeButton' type='submit' name='addc' value='voeg toe' />";
+                echo "<input class='aantal' type='number' style='width: 10%;' name='aantal' min='1' value='0' />";
+                echo "<input class='voegToeButton' id='voegToeButton'  type='submit' name='addc' value='voeg toe' />";
 
                 echo "</form>";
 
-                echo "<hr />"; // Dit is het lijntje
+                //echo "<hr />"; // Dit is het lijntje
                 echo "</div>";
                
             }
@@ -125,7 +136,6 @@ if (isset($_POST['addc'])){
         
         </div>
        
-
         <p>pagina 1 - 1</p>
 <!-- <form action="index.php?page=bestellen" method='POST' name='bestellen' id='bestellen'>
 

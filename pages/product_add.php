@@ -43,6 +43,7 @@ if(isset($_POST["submit"])){
     catch(PDOException $e){
         $melding="kon geen nieuw product aanmaken." .$e->getMessage();
     }
+    
     $cat_id = $verbinding->lastInsertId();
     echo "<div id='melding'>" . $melding."</div>";
 
@@ -59,7 +60,7 @@ if(isset($_POST["submit"])){
             $prijsmedium
         )
         );
-        $melding = "noieuw product toegevoegd";
+        $melding = "nieuw product toegevoegd";
     }
     catch(PDOException $e){
         $melding="kon geen nieuw product aanmaken." .$e->getMessage();

@@ -55,12 +55,12 @@ if(isset($_POST["submit"])){
                 $dif = $timestamp2 - $timestamp1;
                 // als de link geldig is sla ik het nieuwe wachtwoord op
                 if(($timestamp2 - $timestamp1) < 43200){
-                    $query = "UPDATE klant SET 'wachtwoord' = ? WHERE 'email' = ?";
+                    $query = "UPDATE klant SET wachtwoord = ? WHERE email = ?";
                     $stmt = $verbinding->prepare($query);
                     $stmt = $stmt->execute(array($wachtwoordHash, $email));
                     if($stmt){
                         print_r($_POST);
-                        
+                        echo "<p>het is je gelukt</p>";
 
                     }
                 }else{

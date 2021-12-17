@@ -44,4 +44,7 @@ if(isset($_POST["submit"])){
             }
             echo "<div id='melding'>".$melding. "</div>";
     }
+
+    echo "<script> location.href='index.php?page=inloggen';</script>";
+
 }

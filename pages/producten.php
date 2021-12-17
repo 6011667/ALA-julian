@@ -6,12 +6,15 @@
 // var_dump(!isset($_SESSION["ID"]));
 
 
-// $sql = "SELECT * FROM klant ";             
-//         $stmt = $verbinding->prepare($sql);
-//         $stmt->execute();   // array($email))
-//         $resultaat = $stmt->fetch(PDO::FETCH_ASSOC);
 
+// $toegang = $resultaat['permissie'];
 
+// if($toegang == 'admintoegang'){
+//     header('Location: index.php?page=producten');
+// }
+// else{
+//     header('Location: index.php?page=webshop');
+// }
 
 
 
@@ -33,6 +36,21 @@ if( !isset($_SESSION["ID"])|| (!isset($_SESSION["STATUS"]) &&$_SESSION["STATUS"]
 //     location.href='index.php';
 //     </script>";
 // }
+$sql = "SELECT * FROM gebruiker_permissies WHERE gebruiker_ID = ?  AND permissie_ID = 'admintoegang' "; //           
+        $stmt = $verbinding->prepare($sql);
+        $stmt->execute(array($_SESSION["USER_ID"]));   // array($email))
+        $resultaat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // print_r($_SESSION);
+    //     echo $_SESSION["ID"];
+// echo $resultaat;
+if(!$resultaat){
+    // echo 'verboden';
+    header('Location: index.php?page=webshop');
+}
+else{
+    // echo 'toegestaan';
+}
 
 ?>
 <div class="content">

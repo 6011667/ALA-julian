@@ -16,23 +16,26 @@ $resultaten = $stmt->fetchAll(PDO::FETCH_ASSOC);
 foreach($resultaten as $resultaat){
     ?>
 <div class="content">
-    <form action="index.php?page=profiel_update" name="edit" class="form" method="POST">
-
-    <p id="page_titel">Edit profiel</p> <a href="index.php?page=nieuwwachtwoord">verander je wacht woord hier</a>
- 
+    <form action="index.php?page=profiel_update" name="edit" class="inlogFormulier" method="POST">
+<br>
+    <p id="page_titel">Edit profiel</p>
+ <br>
     <!-- <input type="hidden" name="id" id="id" value=" <?php //echo $resultaat['ID'];?> "/> -->
     <label >voornaam:</label>
-    <input type="text" name="voornaam" id="voornaam" value="<?php  echo $resultaat['voornaam'];?>" />
+    <input class="inputVeld" type="text" name="voornaam" id="voornaam" value="<?php  echo $resultaat['voornaam'];?>" />
     <label >achternaam:</label>
-    <input type="text" name="achternaam" id="achternaam" value="<?php echo $resultaat['achternaam'];?>">
+    <input class="inputVeld" type="text" name="achternaam" id="achternaam" value="<?php echo $resultaat['achternaam'];?>">
     <label >straat:</label>
-    <input type="text" name="straat" id="straat" value="<?php echo $resultaat['straat'];?>">
+    <input class="inputVeld" type="text" name="straat" id="straat" value="<?php echo $resultaat['straat'];?>">
     <label >postcode:</label>
-    <input type="text" name="postcode" id="postcode" value="<?php echo $resultaat['postcode'];?>">
+    <input  class="inputVeld" type="text" name="postcode" id="postcode" value="<?php echo $resultaat['postcode'];?>">
     <label >woonplaats:</label>
-    <input type="text" name="woonplaats" id="woonplaats" value="<?php echo $resultaat['woonplaats'];?>">
+    <input class="inputVeld" type="text" name="woonplaats" id="woonplaats" value="<?php echo $resultaat['woonplaats'];?>">
     <label >email:</label>
-    <input type="email" name="e-mail" id="e-mail" value="<?php echo $resultaat['email'];?>">
+    <input class="inputVeld" type="email" name="e-mail" id="e-mail" value="<?php echo $resultaat['email'];?>">
+
+     <a  class="bevestigenIcon2" href="index.php?page=nieuwwachtwoord">verander je wacht woord hier</a>
+     <!-- <button class="bevestigenIcon">test</button> -->
     <br>
     <div class="icon_container">
         <input class="bevestigenIcon" type="submit" class="icon" id="submit" name="submit" value="&rarr;" />

@@ -59,16 +59,23 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ){
 }
 
 ?>
+<div class='imw'>
 <h3>
     in mijn winkelwagentje
 </h3>
+</div>
+<div class="winkelmandbox">
 <?php 
 
 // print_r($_SESSION);
 
+
+
+$totaal = 0;
+
 foreach ( $_SESSION['winkelwagen'] as $key => $value ) {
     // echo 'pizza '.$key. " ". $value. " stuks<br>";
-
+    
     $querys = "SELECT * FROM product  WHERE ID = ?";
 
     $stmt = $verbinding->prepare($querys);
@@ -84,42 +91,81 @@ foreach ( $_SESSION['winkelwagen'] as $key => $value ) {
 
 
     $subtotaal = $product["prijs"] * $value ; 
-    $totaal = 0;
+    
+    
+   
     
 
 
-    
-    echo '<form method="post">';
+     
+    echo '<form method="post" class="kaart2">';  //class="winkelmandje"
 
-    echo '<b>naam:</b>';
+ 
+
+    echo "<img width='382px' src='img/". $categorie['afbeelding']. "'/>" ;
+    echo "<table id='tabletwee' border='0' cellspacing='20'>";
+    echo "    
+        <thead>
+            <tr>
+                <th>productnaam</th>
+                <th>formaat</th>
+                 <th>prijs</th>
+                <th>aantal</th> 
+                <th>subtotaal</th
+            </tr>
+        </thead>
+        <tbody>";  //<caption><h3>Producten aanpassen</h3> </caption>
+    // echo '<b> pizza: </b>';
+    echo "<td>";
     echo $categorie["naam"];
+    echo "</td>";
     echo '&nbsp;';
-    echo '<b> formaat:</b>';
+    // echo '<b> formaat:</b>';
+    echo "<td>";
     echo $product["formaat_ID"];
+    echo "</td>";
     echo '&nbsp;&nbsp;';
-    echo  '<b>  prijs</b>: €' .$product["prijs"];
+    echo "<td>";
+    // echo  '<b>  prijs</b>: €'; 
+    echo $product["prijs"];
+    echo "</td>";
     echo '&nbsp;&nbsp;';
-    echo $value;
-    echo '<button name="add" value="'.$product['ID'].'">+</button>';
-    echo '<button name="del" value="'.$product['ID'].'">-</button> ';
+    // echo '<b> Aantal:</b>';
+    echo "<td>";
+    echo '<button style="width: 30px;" name="add" value="'.$product['ID'].'">+</button>';
+    echo ' '.$value. ' ';
+    echo '<button style="width: 30px;" name="del" value="'.$product['ID'].'">-</button> ';
+    echo "</td>";
+    // echo '<button style="width: 30px;" name="add" value="'.$product['ID'].'">+</button>';
+    // echo '<button style="width: 30px;" name="del" value="'.$product['ID'].'">-</button> ';
+
+    echo "<td>";
     echo '<b>subtotaal : € </b> '. $subtotaal;
-    echo '</div> ';
+    echo "</td>";
+    // echo '</div> ';
    
-   
+   echo "</tbody>";
+   echo "</table>";
     echo '<br>';
     echo '</form>';
     
+
+    $totaal += $subtotaal;
 }
 
+echo '<h3>het totaal van de bestelling is: €'.  number_format($totaal, 2, ',','.') . '</h3>';
 
 ?>
+
+</div>
 <form method="post">
-    <button name="clear">clear</button>
+    <button class="bevestigenIcon3" name="clear">maak je mandje leeg</button>
 </form>
 
 <?php
-// echo $totaal;
-echo   'totaal :' . $totaal +$subtotaal ;
+// echo  'totaal is'.$totaal;
+// echo   'totaal :' . $totaal +$subtotaal ;
+
 ?>
 <div>
 <form action="index.php?page=bestellen" method='POST' name='bestellen' id='bestellen'>
@@ -142,28 +188,28 @@ $resultaten = $stmt->fetchAll(PDO::FETCH_ASSOC);
 foreach($resultaten as $resultaat){
     ?>
 <div class="content">
-        <form  action="index.php?page=bestellen" method='POST' name='bestellen' id='bestellen'>
-            <p id="pagina_titel">vul hier eerst nog een keertje je gegevens in.</p>
+        <form  action="index.php?page=bestellen" method='POST' name='bestellen' id='bestellen' class="inlogFormulier">
+            <p id="pagina_titel">kijk hier eerst nog een keertje of je gegevens kloppen.</p>
         
             <label >voornaam:</label>
-    <input type="text" name="voornaam" id="voornaam" value="<?php  echo $resultaat['voornaam'];?>" />
+    <input class="inputVeld" type="text" name="voornaam" id="voornaam" value="<?php  echo $resultaat['voornaam'];?>" />
     <label >achternaam:</label>
-    <input type="text" name="achternaam" id="achternaam" value="<?php echo $resultaat['achternaam'];?>">
+    <input class="inputVeld" type="text" name="achternaam" id="achternaam" value="<?php echo $resultaat['achternaam'];?>">
     <label >straat:</label>
-    <input type="text" name="straat" id="straat" value="<?php echo $resultaat['straat'];?>">
+    <input class="inputVeld" type="text" name="straat" id="straat" value="<?php echo $resultaat['straat'];?>">
     <label >postcode:</label>
-    <input type="text" name="postcode" id="postcode" value="<?php echo $resultaat['postcode'];?>">
+    <input class="inputVeld" type="text" name="postcode" id="postcode" value="<?php echo $resultaat['postcode'];?>">
     <label >woonplaats:</label>
-    <input type="text" name="woonplaats" id="woonplaats" value="<?php echo $resultaat['woonplaats'];?>">
+    <input class="inputVeld" type="text" name="woonplaats" id="woonplaats" value="<?php echo $resultaat['woonplaats'];?>">
     <label >email:</label>
-    <input type="email" name="e-mail" id="e-mail" value="<?php echo $resultaat['email'];?>">
+    <input class="inputVeld" type="email" name="e-mail" id="e-mail" value="<?php echo $resultaat['email'];?>">
 
           
         
 </br>
  <!-- // dit is de bestelknop -->
  <div class="icon_container">
-                <input type="submit" class="winkelKnop" id="bestellen" name="bestellen" value="bestellen" /> 
+                <input class="bevestigenIcon2" type="submit"  id="bestellen" name="bestellen" value="bestellen" /> 
                 <!-- &rarr; -->
             </div>
         </form>

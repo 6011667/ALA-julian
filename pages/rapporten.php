@@ -13,7 +13,7 @@ if(!isset($_SESSION["ID"])|| (!isset($_SESSION["STATUS"]) &&$_SESSION["STATUS"]!
         <select style="font-size: 1.0rem" name="rapport">
     <option value="">Rapport selecteren</option>
     <option value="orders">Orders</option>
-    <option value="voorraad">Voorraad</option>
+    <!-- <option value="voorraad">Voorraad</option> -->
 </select>
 <br>
 <div class="icon_container">
@@ -26,8 +26,6 @@ if(isset($_POST["submit"])){
     if($_POST["rapport"]== "orders") {
         include_once("rapport_orders.php");
     }
-    elseif($_POST["rapport"]== "voorraad"){
-        include_once("rapport_voorraad.php");
-    }
+    
 }
 ?>

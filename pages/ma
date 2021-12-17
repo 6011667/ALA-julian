@@ -1,0 +1,41 @@
+<?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+require 'PHPMailer-master/src/PHPMailer.php';
+require 'PHPMailer-master/src/SMTP.php';
+require 'PHPMailer-master/src/Exception.php';
+//deze function stuurt emails via gmail
+function mailen($ontvangerStraat, $ontvangerNaam, $onderwerp, $bericht){
+
+$mail = new PHPMailer();
+
+//verbinden met gmail 
+$mail->IsSMTP();
+$mail->SMTPAutch = true;
+$mail->SMPTSecure = "ssl";
+$mail->Host = "smpt.gmail.com";
+$mail->Port = 465;
+
+//identificeer jezelf bij gmail
+$mail->Username = "julianelderson@gmail.com";
+$mail->Password = "NVT";
+
+//email opstellen
+$mail->isHTML(true);
+$mail->SetFrom("julianelderson@gmail.com", "naam");
+$mail->Subject = $onderwerp;
+$mail->CharSet = 'UTF-8';
+$bericht = "<body style=\"font-family: verdana, Verdana, Geneva, sans-serif; font-size: 14px; color: #000;\">".
+$bericht . "</body></html>";
+$mail->AddAddres($ontvangerStraat, $ontvangerNaam);
+$mail->Body = $bericht;
+
+//stuur mail
+if($mail->Send()){
+echo "<script>alert('Mail is verstuurd');</script>";
+}
+else{
+echo "<script>alert('kon geen mail versturen');</script>";
+}
+}
+?>

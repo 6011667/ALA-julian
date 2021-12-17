@@ -9,8 +9,8 @@
 <!-- dit is de login knop -->
     <input type="submit" class="bevestigenIcon" id="submit" name="submit" value="&rarr;" />     
 </div>
-<a class="inlogLinks" href="registreren.php">Registreren</a><br>
-<a class="inlogLinks" href="wachtwoord_vergeten.php"> Wachtwoord vergeten</a>
+<a class="bevestigenIcon2" href="registreren.php">Registreren</a><br>
+<a class="bevestigenIcon2" href="index.php?page=nieuwwachtwoord"> Wachtwoord vergeten</a>
 </form>
 </div>
 <?php

@@ -6,7 +6,7 @@ if(!isset($_SESSION["ID"])|| (!isset($_SESSION["STATUS"]) &&$_SESSION["STATUS"]!
     location.href='index.php';
     </script>";
 }
-
+include("bibliotheek/mailen.php");
 
 // if(isset($_POST["bestellen"])){
 //     // weborder aanmaken
@@ -48,9 +48,11 @@ if(!isset($_SESSION["ID"])|| (!isset($_SESSION["STATUS"]) &&$_SESSION["STATUS"]!
 //     }
 // }
 ?>
+<?php
 
 
 
+?>
 <?php
 
 if( isset($_POST['bestellen'])){
@@ -73,9 +75,9 @@ if( isset($_POST['bestellen'])){
     $klantid = $_SESSION["USER_ID"];
     $data = array(NULL, $klantid, $voornaam, $achternaam, $straat, $postcode, $woonplaats, $email);
     try {
-        print_r($data);
+        // print_r($data);
         $stmt->execute($data);
-        echo "<script> alert('bestelling aangemaakt.');</script>";
+        echo "<script> alert('bestelling aangemaakt!');</script>";
     }catch(PDOException $e){
         echo $e->getMessage();
         echo "<script> alert('kon geen bestelling aanmaken');</script>";
@@ -108,12 +110,65 @@ if( isset($_POST['bestellen'])){
     //     echo "<script> location.href='index.php?page=webshop';</script>";
     // }
 
+    $weborder_id = $verbinding ->lastInsertId();
 
+    $totaal = 0;
+
+    // hier zet ik alvast de tekst klaar die niet herhaald moet worden
+    $eindbericht = "<h2> Beste ". $_SESSION['USER_NAAM'] .", <br> bedankt voor je bestelling bij Julian's pizza! de factuur is hieronder gedeeld</h2> <hr />";
+
+    foreach ( $_SESSION['winkelwagen'] as $key => $value ) {
+        // echo 'pizza '.$key. " ". $value. " stuks<br>";
+    
+        $querys = "SELECT * FROM product  WHERE ID = ?";
+    
+        $stmt = $verbinding->prepare($querys);
+        $stmt->execute(array($key));
+        $product = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        // print_r($product);
+    
+        $categorie_query = "SELECT * FROM categorie WHERE ID = ?";
+        $stmt = $verbinding->prepare($categorie_query);
+        $stmt->execute(array($product['categorie_ID']));
+        $categorie = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    
+        $subtotaal = $product["prijs"] * $value ; 
+        // $totaal = 0;
+        
+    
+        $subtotaal = $product["prijs"] * $value ; 
+        $totaal += $subtotaal;
+        
+        
+        // echo '<form type="hidden" method="post" class="winkelmandje"';
+    
+        // echo '<b> pizza: </b>';
+        // echo $categorie["naam"];
+        // echo '&nbsp;';
+        // echo '<b> formaat:</b>';
+        // echo $product["formaat_ID"];
+        // echo '&nbsp;&nbsp;';
+        // echo  '<b>  prijs</b>: €' .$product["prijs"];
+        // echo '&nbsp;&nbsp;';
+        // echo '<b> Aantal:</b>';
+        // echo $value;
+        // echo '<button style="width: 30px;" name="add" value="'.$product['ID'].'">+</button>';
+        // echo '<button style="width: 30px; name="del" value="'.$product['ID'].'">-</button> ';
+        // echo '<b>subtotaal : € </b> '. $subtotaal;
+        // // echo '</div> ';
+       
+       
+        // echo '<br>';
+        // echo '</form>';
+        
+    
     
 
-    $weborder_id = $verbinding->lastInsertId();
+    // $weborder_id = $verbinding->lastInsertId();
     $aantal = $value;
-    $product_id = $_POST['id'];
+    $product_id = $categorie['ID'];
     $prijs_eenheid = $product['prijs'];
     
 
@@ -125,19 +180,43 @@ if( isset($_POST['bestellen'])){
 
     try{
         $stmt->execute($data);
-        echo "<script> alert('item opgeslagen');</script>";
+        // echo "<script> alert('item opgeslagen');</script>";
         // echo "<script> location.href='facturering.php';</script>";
     }catch(PDOException $e){
         echo $e->getMessage();
         echo "<script> alert('kon geen item opslaan ');</script>";
     }
+
+// hier haal ik de gegevens op voor de factuur (email en klant naam)
+    $email = $_SESSION['E-MAIL'];
+    // $email = "julian@elderson.eu";
+    $klant = $_SESSION['USER_NAAM'];
+    // $klant = "testklant";
+    $onderwerp = "Uw bestelling bij Pizza's by Julian";
+    // hier gooi ik het product wat in de bestelling zit in een subbericht 
+    $subbericht = "<h3>de pizza:  ". $categorie['naam'] . "<br> de prijs van de pizza: €" . $product['prijs'] ."<br> formaat: ".$product["formaat_ID"] ."<br>aantal: " . $value . "<br>het subtotaal bedroeg: €" . number_format($subtotaal, 2, ',','.') ."<br><br>";
+    // hier plak ik het subbericht aan het eindbericht
+    $eindbericht = $eindbericht . $subbericht;
+    // $bericht = "geachte klant uw bestelling is aangemaakt";
+    // echo $eindbericht;
+    echo "<br>";
+
     echo "<script> location.href='index.php?page=webshop';</script>";
 
-
+//"<img width='100px' src='img/". $categorie['afbeelding']. "'/>" .
 
 
 
 
 
     unset( $_SESSION['winkelwagen'] );
+}
+
+// echo 'eindbericht: '. $eindbericht;
+// hier voeg ik nog het totaal toe  van de bestelling die ik niet telkens wil herhalen in de loop
+$eindbericht = $eindbericht . '<hr />het totaal bedroeg: €'.number_format($totaal, 2, ',','.');
+
+// $totaalfactuur = "totaal van de bestelling is: ". $totaal;
+// $eindbericht = $eindbericht . $totaalfactuur;
+mailen($email, $klant, $onderwerp, $eindbericht);
 }
